@@ -1,0 +1,186 @@
+{
+  "devices": [
+    {
+      "name": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/devices/AVPHwEuPm5ac63VYOTYH8d7DxiW8IB90RVmAO--J4Q8z6Z5nc_5C944HdVP1MczPpI6lzUcA4c6OlsF9qa_h8qtz_8zM",
+      "type": "sdm.devices.types.CAMERA",
+      "assignee": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEu9fCirSqtA9rj64xeRvMsJCMrV-idLabmprePb5pq8JZXAkctoE1FyDrdQ_x_Hhg1uRh_3Jk8wLm8zwNVnpppo5ap7_lE1DqJN4JMYPJGALk9TEmUpayZgj6sfy7oufhEMCirmpQ",
+      "traits": {
+        "sdm.devices.traits.Info": {
+          "customName": ""
+        },
+        "sdm.devices.traits.CameraLiveStream": {
+          "maxVideoResolution": {
+            "width": 640,
+            "height": 480
+          },
+          "videoCodecs": [
+            "H264"
+          ],
+          "audioCodecs": [
+            "AAC"
+          ],
+          "supportedProtocols": [
+            "RTSP"
+          ]
+        },
+        "sdm.devices.traits.CameraImage": {
+          "maxImageResolution": {
+            "width": 1920,
+            "height": 1200
+          }
+        },
+        "sdm.devices.traits.CameraPerson": {},
+        "sdm.devices.traits.CameraSound": {},
+        "sdm.devices.traits.CameraMotion": {},
+        "sdm.devices.traits.CameraEventImage": {}
+      },
+      "parentRelations": [
+        {
+          "parent": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEu9fCirSqtA9rj64xeRvMsJCMrV-idLabmprePb5pq8JZXAkctoE1FyDrdQ_x_Hhg1uRh_3Jk8wLm8zwNVnpppo5ap7_lE1DqJN4JMYPJGALk9TEmUpayZgj6sfy7oufhEMCirmpQ",
+          "displayName": "Guest Room"
+        }
+      ]
+    },
+    {
+      "name": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/devices/AVPHwEtqhSKoQdtHL9qbY0bnkiXKIVhgFLCDVhKdGc8hMXuHnI7I8G6zc3iHKzMiT1HUZ2_ES3vysREozvAbmjzCkwO4",
+      "type": "sdm.devices.types.DOORBELL",
+      "assignee": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEu2q0YXEXz9zAxjxQGE9B82QU8y-27VoTYVuXSUiiC3j7rwztPGXuc5EbdfYLRZHQis1OrS8xHzK2gNKXj2R3NlaTEliYDRZ7o4Hc055dT0jXsGVLZs18DXqZyQhngF3t9njAdLAw",
+      "traits": {
+        "sdm.devices.traits.Info": {
+          "customName": ""
+        },
+        "sdm.devices.traits.CameraLiveStream": {
+          "maxVideoResolution": {
+            "width": 640,
+            "height": 480
+          },
+          "videoCodecs": [
+            "H264"
+          ],
+          "audioCodecs": [
+            "AAC"
+          ],
+          "supportedProtocols": [
+            "RTSP"
+          ]
+        },
+        "sdm.devices.traits.CameraImage": {
+          "maxImageResolution": {
+            "width": 1920,
+            "height": 1200
+          }
+        },
+        "sdm.devices.traits.CameraPerson": {},
+        "sdm.devices.traits.CameraSound": {},
+        "sdm.devices.traits.CameraMotion": {},
+        "sdm.devices.traits.CameraEventImage": {},
+        "sdm.devices.traits.DoorbellChime": {}
+      },
+      "parentRelations": [
+        {
+          "parent": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEu2q0YXEXz9zAxjxQGE9B82QU8y-27VoTYVuXSUiiC3j7rwztPGXuc5EbdfYLRZHQis1OrS8xHzK2gNKXj2R3NlaTEliYDRZ7o4Hc055dT0jXsGVLZs18DXqZyQhngF3t9njAdLAw",
+          "displayName": "Front Door"
+        }
+      ]
+    },
+    {
+      "name": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/devices/AVPHwEtbJtsSFYWelamWHpApUO9K3tCaEG73MIhdsF9k1PxR-i2e0sbR8YTaJqSjr5DnfQJu_upajc5MybocP2m8lhAq",
+      "type": "sdm.devices.types.CAMERA",
+      "assignee": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEvCrXPbVVjelyF14JtVBgqDMSyhDsFDQPCWXSrDoXsBn7kHXopyJUX00i6SmSdRXIdlIKsO6u0kPlLoemNpfeelC_kh6fKkVnB6uiq2_mU6W_Bi2fedNSFx5WSvPwZbnXj2uOtYsg",
+      "traits": {
+        "sdm.devices.traits.Info": {
+          "customName": "Back of the House"
+        },
+        "sdm.devices.traits.CameraLiveStream": {
+          "videoCodecs": [
+            "H264"
+          ],
+          "audioCodecs": [
+            "OPUS"
+          ],
+          "supportedProtocols": [
+            "WEB_RTC"
+          ]
+        },
+        "sdm.devices.traits.CameraPerson": {},
+        "sdm.devices.traits.CameraMotion": {}
+      },
+      "parentRelations": [
+        {
+          "parent": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEvCrXPbVVjelyF14JtVBgqDMSyhDsFDQPCWXSrDoXsBn7kHXopyJUX00i6SmSdRXIdlIKsO6u0kPlLoemNpfeelC_kh6fKkVnB6uiq2_mU6W_Bi2fedNSFx5WSvPwZbnXj2uOtYsg",
+          "displayName": "Back garden"
+        }
+      ]
+    },
+    {
+      "name": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/devices/AVPHwEsn_5izDWg9Ptg5c2VNzvLg-sRsqWOkSBtV8k58Gbpw-qlGtlkd7_UOGTKgfcjsicp4H-IPRqOSn15sICx5EFLB",
+      "type": "sdm.devices.types.CAMERA",
+      "assignee": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEvCrXPbVVjelyF14JtVBgqDMSyhDsFDQPCWXSrDoXsBn7kHXopyJUX00i6SmSdRXIdlIKsO6u0kPlLoemNpfeelC_kh6fKkVnB6uiq2_mU6W_Bi2fedNSFx5WSvPwZbnXj2uOtYsg",
+      "traits": {
+        "sdm.devices.traits.Info": {
+          "customName": "Back garden"
+        },
+        "sdm.devices.traits.CameraLiveStream": {
+          "videoCodecs": [
+            "H264"
+          ],
+          "audioCodecs": [
+            "OPUS"
+          ],
+          "supportedProtocols": [
+            "WEB_RTC"
+          ]
+        },
+        "sdm.devices.traits.CameraPerson": {},
+        "sdm.devices.traits.CameraMotion": {}
+      },
+      "parentRelations": [
+        {
+          "parent": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEvCrXPbVVjelyF14JtVBgqDMSyhDsFDQPCWXSrDoXsBn7kHXopyJUX00i6SmSdRXIdlIKsO6u0kPlLoemNpfeelC_kh6fKkVnB6uiq2_mU6W_Bi2fedNSFx5WSvPwZbnXj2uOtYsg",
+          "displayName": "Back garden"
+        }
+      ]
+    },
+    {
+      "name": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/devices/AVPHwEuipwd0gNF_YoE8hX9Yge6X9jNjcwZkYgFjj0PPR6wmse0Nu9E7x4agXjRhxNhfPnz8rifxhU4VmWBxR3xzYW-G",
+      "type": "sdm.devices.types.CAMERA",
+      "assignee": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEtYgFahhMQh5ASjuwhWvpof1fpoCWgMtGjQAN98-zCIz9Fz3sW9CDNoMBzg2oeoUR9tNKcUi8iPTG_rHKzh_aBINcJb2Uk51c4Awhe7prid_C1moCA0X63_yE7fgSB7UK2QFXT4ew",
+      "traits": {
+        "sdm.devices.traits.Info": {
+          "customName": ""
+        },
+        "sdm.devices.traits.CameraLiveStream": {
+          "maxVideoResolution": {
+            "width": 640,
+            "height": 480
+          },
+          "videoCodecs": [
+            "H264"
+          ],
+          "audioCodecs": [
+            "AAC"
+          ],
+          "supportedProtocols": [
+            "RTSP"
+          ]
+        },
+        "sdm.devices.traits.CameraImage": {
+          "maxImageResolution": {
+            "width": 1920,
+            "height": 1200
+          }
+        },
+        "sdm.devices.traits.CameraPerson": {},
+        "sdm.devices.traits.CameraSound": {},
+        "sdm.devices.traits.CameraMotion": {},
+        "sdm.devices.traits.CameraEventImage": {}
+      },
+      "parentRelations": [
+        {
+          "parent": "enterprises/92046848-4dc7-465d-948e-3060efad9fe9/structures/AVPHwEuglv8aRRDfRcaQvyr2yG5KE7_gqxNe1Mr33Pz99yFkHLoErEkvbvY0L8XzCBI6Vx65qbncJ0B1CyuXjvTCEZDE/rooms/AVPHwEtYgFahhMQh5ASjuwhWvpof1fpoCWgMtGjQAN98-zCIz9Fz3sW9CDNoMBzg2oeoUR9tNKcUi8iPTG_rHKzh_aBINcJb2Uk51c4Awhe7prid_C1moCA0X63_yE7fgSB7UK2QFXT4ew",
+          "displayName": "Downstairs Office"
+        }
+      ]
+    }
+  ]
+}
