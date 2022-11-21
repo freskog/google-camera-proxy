@@ -20,3 +20,4 @@ yup-oauth2 = "8"
 reqwest = { version = "0.11.13", features = ["json"] }
 hyper-rustls = "0.23.1"
 hyper = "0.14.23"
+video-rs = { version = "0.1", features = ["ndarray"] }
