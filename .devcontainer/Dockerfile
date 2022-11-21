@@ -1,4 +1,4 @@
-FROM qmcgaw/rustdevcontainer:debian
+FROM rust:1.65-bullseye
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install git libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
@@ -6,9 +6,14 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
       gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
       gstreamer1.0-libav libgstrtspserver-1.0-dev libges-1.0-dev \
       libgstreamer-plugins-bad1.0-dev \
-      libssl-dev
+      libssl-dev \
+      clang 
+      
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install clang sudo llvm libavcodec-dev libavformat-dev libavutil-dev libavdevice-dev pkg-config
 
 RUN useradd -ms /bin/bash vscode
+
 USER vscode
 ADD client_secret.json /home/vscode/client_secret.json
 WORKDIR /workspace
