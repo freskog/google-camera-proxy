@@ -12,5 +12,5 @@ services:
       - ../:/workspace
       - ~/.docker:/home/vscode/.docker
       - /var/run/docker.sock:/var/run/docker.sock
-    entrypoint: zsh -c "while sleep 1000; do :; done"
+    entrypoint: /bin/bash -c "while sleep 1000; do :; done"
 
