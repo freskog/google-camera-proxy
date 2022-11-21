@@ -1,3 +1,6 @@
+use std::collections::HashMap;
+
+use reqwest::Url;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -49,6 +52,37 @@ pub struct DeviceInfo {
 #[serde(rename_all = "camelCase")]
 pub struct Location {
     pub display_name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct StreamResponse<T> {
+    pub results: T,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct RtspStreamGenerated {
+    pub stream_urls: StreamUrl,
+    pub stream_extension_token: String,
+    pub stream_token: String,
+    pub expires_at: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub enum StreamUrl {
+    RtspUrl(String),
+}
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct RtspStreamExtended {}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct ExecuteCommandBody {
+    pub command: String,
+    pub params: HashMap<String, String>,
 }
 
 #[cfg(test)]
