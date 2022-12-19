@@ -1,2 +1,2 @@
-mod api;
-mod client;
+pub mod api;
+pub mod client;

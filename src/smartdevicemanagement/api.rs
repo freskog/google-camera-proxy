@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 
-use reqwest::Url;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]

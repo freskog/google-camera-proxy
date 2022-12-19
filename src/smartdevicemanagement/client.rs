@@ -1,6 +1,4 @@
-use std::collections::{self, HashMap};
-
-use crate::smartdevicemanagement::api::StreamUrl::*;
+use crate::smartdevicemanagement::api::StreamUrl::RtspUrl;
 use crate::smartdevicemanagement::api::*;
 use anyhow::Result;
 use dirs;
@@ -41,7 +39,7 @@ pub struct SmartDeviceMgmtApi {
 }
 
 impl SmartDeviceMgmtApi {
-    async fn new() -> SmartDeviceMgmtApi {
+    pub async fn new() -> SmartDeviceMgmtApi {
         let auth = auth().await;
         let client = reqwest::Client::new();
         let scopes = vec!["https://www.googleapis.com/auth/sdm.service".to_string()];
@@ -54,7 +52,7 @@ impl SmartDeviceMgmtApi {
         }
     }
 
-    async fn device_list(&self) -> Result<DeviceList, anyhow::Error> {
+    pub async fn device_list(&self) -> Result<DeviceList, anyhow::Error> {
         let device_list = self
             .base_url
             .join("enterprises/92046848-4dc7-465d-948e-3060efad9fe9/devices")?;
@@ -75,7 +73,7 @@ impl SmartDeviceMgmtApi {
         devices
     }
 
-    async fn generate_rtsp_stream(
+    pub async fn generate_rtsp_stream(
         &self,
         device_id: &String,
     ) -> Result<StreamResponse<RtspStreamGenerated>, anyhow::Error> {

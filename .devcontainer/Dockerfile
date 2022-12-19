@@ -12,6 +12,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install clang sudo llvm libavcodec-dev libavformat-dev libavutil-dev libavdevice-dev pkg-config
 
+
 RUN useradd -ms /bin/bash vscode
 RUN mkdir /workspace
 RUN chown vscode:vscode /workspace
@@ -19,3 +20,5 @@ RUN chown vscode:vscode /workspace
 USER vscode
 ADD client_secret.json /home/vscode/client_secret.json
 WORKDIR /workspace
+
+RUN rustup component add rustfmt
