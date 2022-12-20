@@ -3,17 +3,17 @@
 mod smartdevicemanagement;
 
 use crate::smartdevicemanagement::api::StreamUrl::RtspUrl;
-use std::env;
 use std::sync::{Arc, Mutex};
 
-use gio::TlsCertificateFlags;
+use glib::prelude::*;
+use glib::{translate::*, Value};
 use gst::element_error;
-use gst::element_warning;
 use gst::prelude::*;
 use gst::Element;
 use gst::Pad;
 use gst_rtsp::RTSPLowerTrans;
-use gst_rtsp_server::prelude::*;
+use gst_rtsp_sys::GstRTSPMessage;
+use gst_sdp::SDPMessage;
 
 use anyhow::{anyhow, Error};
 use derive_more::{Display, Error};
@@ -71,6 +71,13 @@ fn get_rtsp_url() -> String {
     };
 }
 
+fn value_to_rtsp_message(value: &Value) -> Option<GstRTSPMessage> {
+    unsafe {
+        let ptr = value.as_ptr() as *mut GstRTSPMessage;
+        ptr.as_ref().map(|m| m.to_glib_none().0)
+    }
+}
+
 fn main_loop() -> Result<(), Error> {
     let pipeline = gst::Pipeline::default();
 
@@ -83,6 +90,17 @@ fn main_loop() -> Result<(), Error> {
         .property("do-rtsp-keep-alive", true)
         .property("debug", true)
         .build()?;
+
+    rtspsrc.connect("before-send", true, {
+        move |input: &[Value]| unsafe {
+            let message = input[1]
+                .get::<GstRTSPMessage>()
+                .expect("Can't get raw pointer")
+                .cast::<GstRTSPMessage>();
+            gst_rtsp_sys::gst_rtsp_message_dump(message);
+            Some(true.to_value())
+        }
+    });
 
     let videoqueue = Arc::new(Mutex::new(gst::ElementFactory::make("queue").build()?));
 
