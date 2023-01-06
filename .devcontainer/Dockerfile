@@ -1,17 +1,9 @@
-FROM rust:1.65-bullseye
+FROM archlinux:base-devel-20230101.0.115167
 
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install git libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
-      gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
-      gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
-      gstreamer1.0-libav libgstrtspserver-1.0-dev libges-1.0-dev \
-      libgstreamer-plugins-bad1.0-dev \
-      libssl-dev \
-      clang 
-      
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install clang sudo llvm libavcodec-dev libavformat-dev libavutil-dev libavdevice-dev pkg-config
-
+RUN pacman-key --init
+RUN pacman -Sy --noconfirm pipewire-jack pipewire-media-session gst-libav gstreamer \
+                           gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly gst-rtsp-server \
+                           git llvm clang pkg-config rustup
 
 RUN useradd -ms /bin/bash vscode
 RUN mkdir /workspace
@@ -21,4 +13,5 @@ USER vscode
 ADD client_secret.json /home/vscode/client_secret.json
 WORKDIR /workspace
 
+RUN rustup default stable
 RUN rustup component add rustfmt

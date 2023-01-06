@@ -6,14 +6,13 @@ use crate::smartdevicemanagement::api::StreamUrl::RtspUrl;
 use std::sync::{Arc, Mutex};
 
 use glib::prelude::*;
-use glib::{translate::*, Value};
+use glib::Value;
 use gst::element_error;
 use gst::prelude::*;
 use gst::Element;
 use gst::Pad;
 use gst_rtsp::RTSPLowerTrans;
 use gst_rtsp_sys::GstRTSPMessage;
-use gst_sdp::SDPMessage;
 
 use anyhow::{anyhow, Error};
 use derive_more::{Display, Error};
@@ -35,10 +34,10 @@ struct ErrorValue(Arc<Mutex<Option<Error>>>);
 #[display(fmt = "Could not get mount points")]
 struct NoMountPoints;
 
-fn get_test_rtsp_url() -> String {
-    //return "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4".to_owned();
-    return "rtsps://stream-eu1-bravo.dropcam.com:443/sdm_live_stream/CiUA2vuxrxJvURetGs5Bj69Lac7JcuHaigVJkPxdi_je8X4EvOjKEnEAiN-WUy_b3qjTv7sG4wOtuoBnz8tNMGi1G7xVJNLo49gpYTrdWyddWR2pr3QwXy5cF8UEzQzMXP9XakITvqZN0KQLQmtAiFpi9YaFWUrxcZ6zG1vDo7gvx23LqkEdztVxbWlRFWGArBluHnwjhDADLQ?auth=g.0.eyJraWQiOiIyMzhiNTUxZmMyM2EyM2Y4M2E2ZTE3MmJjZTg0YmU3ZjgxMzAzMmM4IiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJuZXN0LXNlY3VyaXR5LWF1dGhwcm94eSIsInN1YiI6Im5lc3RfaWQ6bmVzdC1waG9lbml4LXByb2Q6MjEwODcxMCIsInBvbCI6IjNwLW9hdXRoLXNjb3BlLUFQSV9TRE1fU0VSVklDRS1jbGllbnQtMzQ2MzA2MTUxMjEyLWM1bWFnb3NyMWpzcWQyZDVwdTEzNWxqMjliazVsa3IxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZXhwIjoxNjcwNzAyNTk2fQ.oyX8kEqjxgVd3qt73q2Rqc99h8Aqxg939W9peYxXtgWxDCRzd_WrEaOLo1TKeoyYHiOS6_b010RFToP_9r41O7iOVhomoAdoGzqlQBYkt8HskzwiE7wP2vze_88qeYY1uJ-EaFoake60HKg2PC1piU6B9XxL4KdPpVwH6C1HnttG-AEgBpJ0cqyMpZu2YTz1GCVDbw5BAK7-RvTfXW2sl74GySUuX9fSqdo0Pa8ulU6hkiJzaA7xWOhJhLCjrDmTC-g4R-SB0bkOTnOaIAmePs9yPaYhrNKOmls5L64YS5mSJQ0t0G9ZSP56BSJ9MGmy4dAUyajx0u9UqVWoaqMqVw".to_string();
-}
+// fn get_test_rtsp_url() -> String {
+//     //return "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4".to_owned();
+//     return "rtsps://stream-eu1-bravo.dropcam.com:443/sdm_live_stream/CiUA2vuxrxJvURetGs5Bj69Lac7JcuHaigVJkPxdi_je8X4EvOjKEnEAiN-WUy_b3qjTv7sG4wOtuoBnz8tNMGi1G7xVJNLo49gpYTrdWyddWR2pr3QwXy5cF8UEzQzMXP9XakITvqZN0KQLQmtAiFpi9YaFWUrxcZ6zG1vDo7gvx23LqkEdztVxbWlRFWGArBluHnwjhDADLQ?auth=g.0.eyJraWQiOiIyMzhiNTUxZmMyM2EyM2Y4M2E2ZTE3MmJjZTg0YmU3ZjgxMzAzMmM4IiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJuZXN0LXNlY3VyaXR5LWF1dGhwcm94eSIsInN1YiI6Im5lc3RfaWQ6bmVzdC1waG9lbml4LXByb2Q6MjEwODcxMCIsInBvbCI6IjNwLW9hdXRoLXNjb3BlLUFQSV9TRE1fU0VSVklDRS1jbGllbnQtMzQ2MzA2MTUxMjEyLWM1bWFnb3NyMWpzcWQyZDVwdTEzNWxqMjliazVsa3IxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZXhwIjoxNjcwNzAyNTk2fQ.oyX8kEqjxgVd3qt73q2Rqc99h8Aqxg939W9peYxXtgWxDCRzd_WrEaOLo1TKeoyYHiOS6_b010RFToP_9r41O7iOVhomoAdoGzqlQBYkt8HskzwiE7wP2vze_88qeYY1uJ-EaFoake60HKg2PC1piU6B9XxL4KdPpVwH6C1HnttG-AEgBpJ0cqyMpZu2YTz1GCVDbw5BAK7-RvTfXW2sl74GySUuX9fSqdo0Pa8ulU6hkiJzaA7xWOhJhLCjrDmTC-g4R-SB0bkOTnOaIAmePs9yPaYhrNKOmls5L64YS5mSJQ0t0G9ZSP56BSJ9MGmy4dAUyajx0u9UqVWoaqMqVw".to_string();
+// }
 
 fn get_rtsp_url() -> String {
     let rtsp_camera_url = async {
@@ -71,13 +70,6 @@ fn get_rtsp_url() -> String {
     };
 }
 
-fn value_to_rtsp_message(value: &Value) -> Option<GstRTSPMessage> {
-    unsafe {
-        let ptr = value.as_ptr() as *mut GstRTSPMessage;
-        ptr.as_ref().map(|m| m.to_glib_none().0)
-    }
-}
-
 fn main_loop() -> Result<(), Error> {
     let pipeline = gst::Pipeline::default();
 
@@ -90,17 +82,6 @@ fn main_loop() -> Result<(), Error> {
         .property("do-rtsp-keep-alive", true)
         .property("debug", true)
         .build()?;
-
-    rtspsrc.connect("before-send", true, {
-        move |input: &[Value]| unsafe {
-            let message = input[1]
-                .get::<GstRTSPMessage>()
-                .expect("Can't get raw pointer")
-                .cast::<GstRTSPMessage>();
-            gst_rtsp_sys::gst_rtsp_message_dump(message);
-            Some(true.to_value())
-        }
-    });
 
     let videoqueue = Arc::new(Mutex::new(gst::ElementFactory::make("queue").build()?));
 
@@ -226,7 +207,7 @@ fn main_loop() -> Result<(), Error> {
                     s.pending()
                 );
             }
-            other => println!("MSG: {:#?}", other),
+            _ => (),
         }
     }
 

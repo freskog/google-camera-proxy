@@ -12,5 +12,13 @@ services:
       - ../:/workspace
       - ~/.docker:/home/vscode/.docker
       - /var/run/docker.sock:/var/run/docker.sock
+      - ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:/tmp/${WAYLAND_DISPLAY}
+    environment:
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+      - XDG_RUNTIME_DIR=/tmp
+      - GDK_BACKEND=wayland
+      - CLUTTER_BACKEND=wayland
+      - XDG_SESSION_TYPE=wayland
     entrypoint: /bin/bash -c "while sleep 1000; do :; done"
+
 
