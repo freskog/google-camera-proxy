@@ -105,6 +105,8 @@ fn main_loop() -> Result<(), Error> {
 
     let videoqueue_clone = videoqueue.clone();
     rtspsrc.connect_pad_added(move |rsrc, src_pad| {
+        println!("RTSP Src added!");
+
         let pipeline = match pipeline_weak.upgrade() {
             Some(pipeline) => pipeline,
             None => return,
@@ -131,18 +133,44 @@ fn main_loop() -> Result<(), Error> {
                 &avdec_h264,
                 &videosink,
             ];
-            pipeline.add_many(elements)?;
+
+            let bin = &gst::Bin::new(Some("pay0"));
+
+            println!("Adding elements to bin");
+            bin.add_many(elements)?;
+
+            println!("Adding elements to pipeline");
+
+            pipeline.add(bin)?;
+            println!("Linking elements");
+
             gst::Element::link_many(elements)?;
+
+            println!("elements linked");
 
             for e in elements {
                 e.sync_state_with_parent()?
             }
 
+            bin.sync_state_with_parent()?;
+
+            println!("elements synced");
+
             let sink_pad = videoqueue
                 .static_pad("sink")
                 .expect("video queue has no sinkpad");
 
-            src_pad.link(&sink_pad)?;
+            println!("sink pad found");
+
+            let ghost_pad = gst::GhostPad::with_target(Some("sink"), &sink_pad)?;
+
+            println!("created ghost pad");
+
+            bin.add_pad(&ghost_pad)?;
+
+            println!("added ghost pad");
+
+            src_pad.link(&ghost_pad)?;
 
             println!("Successfully linked rtspsrc to video chain");
 
